@@ -32,7 +32,12 @@ public function set_news()
         'text' => $this->input->post('text')
     );
 
-    return $this->db->insert('sp19_news', $data);
+   // return $this->db->insert('sp19_news', $data);
+    if($this->db->insert('sp19_news', $data))
+    {//return slug - send to veiw page
+        return $slug;
+    }else{//return false
+        return false;
 }
-
+}
 }
