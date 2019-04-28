@@ -23,28 +23,24 @@ class News extends CI_Controller {
 
         public function view($slug = NULL)
         {
-            /*
-            slug without dashes
-            use dashless slug for the title
-            maybe add, 'News Flash - '
-            
-            */
-            
             //slug with out dashes
             $dashless_slug = str_replace("-", " ", $slug);
+            
             //uppercase slug words
             $dashless_slug = ucwords($dashless_slug);
+            
             //use dashless slug for title
-            $this->config->set_item('title', 'News Flash - ', $dashless_slug);
+            $this->config->set_item('title','News Flash - ' . $dashless_slug);
             
             $data['news_item'] = $this->news_model->get_news($slug);
-        if (empty($data['news_item']))
-        {
+            
+            if (empty($data['news_item']))
+            {
                 show_404();
-        }
+            }
 
-        $data['title'] = $data['news_item']['title'];
-        $this->load->view('news/view', $data);
+            $data['title'] = $data['news_item']['title'];
+            $this->load->view('news/view', $data);
         }
         
         public function create()
@@ -67,7 +63,7 @@ class News extends CI_Controller {
             //$this->load->view('news/success', $data);
                 
                 $slug = $this->news_model->set_news();
-                if($this->news_model->set_news()!==false){//slug sent
+                if($slug !==false){//slug sent
                     feedback('Data entered successfully!', 'info');
                     redirect('news/view/' . $slug);
                     
@@ -77,7 +73,7 @@ class News extends CI_Controller {
                 
                 }
             }
-}
+        }
     
     
     
