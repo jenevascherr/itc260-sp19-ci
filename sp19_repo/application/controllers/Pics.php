@@ -22,13 +22,12 @@ class Pics extends CI_Controller {
             foreach($pics as $pic)
                 
                 $size = 'm';
-                $photo_url = 'http://farm' . $pic->farm . '.staticflickr.com/' . $pic->server . '/' . $pic->id . '_' . $pic->secret . '_' . $size . '.jpg';
+                $photo_url = 'http://farm'. $pic->farm . '.staticflickr.com/' . $pic->server . '/' . $pic->id . '_' . $pic->secret . '_' . $size . '.jpg';
             
             echo "<img title='" . $pic->title . "' src='" . $photo_url . "' />";
         }
     
-}
-
+    
         public function view($slug = NULL)
         {
             /*
@@ -53,8 +52,9 @@ class Pics extends CI_Controller {
 
         $data['title'] = $data['news_item']['title'];
         $this->load->view('news/view', $data);
-        }
         */
+        }
+        
     
     
 }
