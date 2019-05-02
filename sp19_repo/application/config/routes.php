@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 //routes for pics
-$route['pics/(:any)'] = 'pics/$1';
+//$route['pics/(:any)'] = 'pics/$1';
 $route['pics'] = 'pics';
 
 //routes for our news model
