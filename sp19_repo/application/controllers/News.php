@@ -14,7 +14,7 @@ class News extends CI_Controller {
         {
             $this->config->set_item('title','Seattle Sports News');
             
-            $nav1 = $this->config->item('nav1');
+            //$nav1 = $this->config->item('nav1');
             
             $data['news'] = $this->news_model->get_news();
             $data['title'] = 'News archive';
@@ -24,13 +24,13 @@ class News extends CI_Controller {
         public function view($slug = NULL)
         {
             //slug with out dashes
-            $dashless_slug = str_replace("-", " ", $slug);
+            //$dashless_slug = str_replace("-", " ", $slug);
             
             //uppercase slug words
-            $dashless_slug = ucwords($dashless_slug);
+           // $dashless_slug = ucwords($dashless_slug);
             
             //use dashless slug for title
-            $this->config->set_item('title','News Flash - ' . $dashless_slug);
+           // $this->config->set_item('title','News Flash - ' . $dashless_slug);
             
             $data['news_item'] = $this->news_model->get_news($slug);
             
@@ -40,6 +40,7 @@ class News extends CI_Controller {
             }
 
             $data['title'] = $data['news_item']['title'];
+            $this->config->set_item('title', 'News Flash - ' . $data['title']);
             $this->load->view('news/view', $data);
         }
         
@@ -49,6 +50,7 @@ class News extends CI_Controller {
             $this->load->library('form_validation');
 
             $data['title'] = 'Create a news item';
+             $this->config->set_item('title', 'Create a news item'
 
             $this->form_validation->set_rules('title', 'Title', 'required');
             $this->form_validation->set_rules('text', 'Text', 'required');
