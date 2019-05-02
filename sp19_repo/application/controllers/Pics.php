@@ -5,56 +5,47 @@ class Pics extends CI_Controller {
         public function __construct()
         {
                 parent::__construct();
+                $this->config->set_item('banner', 'See Flickr Pics');
                 $this->load->model('pics_model');
-                /*
-                $this->config->set_item('banner','News Section');
-                $this->load->model('news_model');
                 $this->load->helper('url_helper');
-                */
-        }
-
-        public function index($tags = 'sounders')
-        {
-
-            //$tags = ='sounders';
-            $pics = $this->pics_model->get_pics($tags);
-            
-            foreach($pics as $pic)
-                
-                $size = 'm';
-                $photo_url = 'http://farm'. $pic->farm . '.staticflickr.com/' . $pic->server . '/' . $pic->id . '_' . $pic->secret . '_' . $size . '.jpg';
-            
-            echo "<img title='" . $pic->title . "' src='" . $photo_url . "' />";
         }
     
-    
-        public function view($slug = NULL)
+             /*   public function set_filter() 
         {
-            /*
-            slug without dashes
-            use dashless slug for the title
-            maybe add, 'News Flash - '
-            
-            
-            
-            //slug with out dashes
-            $dashless_slug = str_replace("-", " ", $slug);
-            //uppercase slug words
-            $dashless_slug = ucwords($dashless_slug);
-            //use dashless slug for title
-            $this->config->set_item('title', 'News Flash - ', $dashless_slug);
-            
-            $data['news_item'] = $this->news_model->get_news($slug);
-        if (empty($data['news_item']))
-        {
-                show_404();
-        }
+            $this->config->set_item('searchfilter', $this->input->get('filter'));
+            $data['tags'] = $this->config->item('searchfilter');
+            $tempfilter = $this->config->item('searchfilter');
+            $this->session->set_userdata('sessionfilter', $tempfilter);
+            redirect('pictures/index/');
+        }  */
 
-        $data['title'] = $data['news_item']['title'];
-        $this->load->view('news/view', $data);
-        */
-        }
+        public function index()
+        {
+            $this->config->set_item('title', 'See Flickr Pics');
         
+            $data['title'] = 'See Flickr Pics';
+        
+            $data['default_tags'] = ['Mariners', 'Seahawks', 'Sounders'];
+        
+            $this->load->view('pics/index', $data);
+        }
     
-    
+ public function view($tags = NULL)
+    {
+        if ($tags === NULL) {
+            $this->config->set_item('title', 'See Flickr Pics | Oops!' . $tags);
+            $data['title'] = 'Oops. No tag entered.';
+        } else {
+            $this->config->set_item('title', 'See Flickr Pics | ' . $tags);
+            $data['title'] = $tags;
+            $data['pics'] = $this->pics_model->get_pics($tags);
+            // 
+            // echo "<pre>";
+            // echo var_dump($data['pics']);
+            // echo "</pre>";
+            // die;
+        }
+        $this->load->view('pics/view', $data);
+    }
 }
+
