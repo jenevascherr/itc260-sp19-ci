@@ -7,10 +7,10 @@ $config['title'] = 'Default Title';
 $config['copyright'] = 'Default Copyright';
 $config['masthead'] = 'Default MastHead';
 $config['theme'] = 'themes/bootswatch/';
-$config['flickrKey'] = '1e830dcdb2119be1fe75b3317ec10ea3';
+$config['flickrKey'] = '3d3c354cbce4c6f6f1852c714ab7caf5';
 
 $config['nav1'] = array(
 'news' => 'News',
 'news/create' => 'Add News',
-'pics' => 'Pics'
+'pics' => 'Pics', 
 );
